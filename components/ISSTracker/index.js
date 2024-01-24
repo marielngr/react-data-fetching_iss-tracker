@@ -21,6 +21,7 @@ export default function ISSTracker() {
     data: coords,
     isLoading,
     error,
+    mutate,
   } = useSWR(URL, fetcher, { refreshInterval: 5000 });
   console.log(coords);
   if (error) return <div>failed to load</div>;
@@ -32,7 +33,7 @@ export default function ISSTracker() {
       <Controls
         longitude={coords.longitude}
         latitude={coords.latitude}
-        // onRefresh={getISSCoords}
+        onRefresh={() => mutate()}
       />
     </main>
   );
